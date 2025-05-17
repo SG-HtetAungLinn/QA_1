@@ -75,7 +75,6 @@ $(document).ready(function () {
             hasError = true;
         }
         if (!hasError) {
-            // Submit form
             $.ajax({
                 url: "app/save_question.php",
                 method: "POST",
@@ -97,7 +96,7 @@ $(document).ready(function () {
             });
         }
     });
-    // Alert function for success and error messages
+    // Alert success and error messages
     function showAlert(message, type = "success") {
         const alertDiv = document.createElement("div");
         alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 translate-middle-x mt-5`;
@@ -111,7 +110,7 @@ $(document).ready(function () {
             alertDiv.remove();
         }, 3000);
     }
-    // Function to handle AJAX errors
+    // Handle AJAX errors
     function handleAjaxError(xhr, status, error) {
         console.error("AJAX Error:", error);
         let errorMessage = "An error occurred. Please try again.";
@@ -121,7 +120,7 @@ $(document).ready(function () {
         }
         showAlert(errorMessage, "danger");
     }
-    // Function to handle AJAX success
+    // Handle AJAX success
     function handleAjaxSuccess(response) {
         if (response.success) {
             showAlert(response.message || "Operation completed successfully");

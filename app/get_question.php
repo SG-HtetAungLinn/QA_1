@@ -14,10 +14,8 @@ if (!empty($search)) {
         // Search in question title and content
         $titleMatch = stripos($question['title'], $search) !== false;
         $contentMatch = stripos($question['content'], $search) !== false;
-
         // Search in student ID
         $studentMatch = stripos($question['student_id'], $search) !== false;
-
         // Search in answers
         $answerMatch = false;
         foreach ($question['answers'] as $answer) {
@@ -29,7 +27,6 @@ if (!empty($search)) {
                 break;
             }
         }
-
         return $titleMatch || $contentMatch || $studentMatch || $answerMatch;
     });
 }

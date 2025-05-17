@@ -17,12 +17,10 @@ $(document).ready(function () {
                 if (response.success) {
                     $("#question_list").html("");
                     let questionHtml;
-
                     // sorting vote count and answer
                     const questions = Array.isArray(response.result)
                         ? response.result
                         : [];
-
                     // Apply answer filter
                     let filteredQuestions = questions;
                     if (filter !== "all") {
@@ -47,90 +45,44 @@ $(document).ready(function () {
 
                     if (sortedQuestions.length > 0) {
                         sortedQuestions.forEach((item) => {
-                            const hasVoted = item.votes.includes(
-                                $("#current_user").val()
-                            );
+                            const hasVoted = item.votes.includes($("#current_user").val());
                             const userRole = $("#user_role").val();
                             const currentUser = $("#current_user").val();
                             // check has answer in question
-                            const hasAnswered = item.answers.some(
-                                (answer) =>
-                                    answer.staff_id === $("#current_user").val()
-                            );
+                            const hasAnswered = item.answers.some((answer) => answer.staff_id === $("#current_user").val());
                             // check show Answer Button condition
-                            const showAnswerButton =
-                                userRole === "staff" && !hasAnswered;
+                            const showAnswerButton = userRole === "staff" && !hasAnswered;
                             // check vote Button condition
-                            const showVoteButton =
-                                userRole === "student" &&
-                                item.answers.length === 0;
+                            const showVoteButton = userRole === "student" && item.answers.length === 0;
                             // question status condition
                             const showStatus = item.answers.length > 0;
                             // check if current user is the question owner
-                            const isQuestionOwner =
-                                item.student_id === currentUser;
+                            const isQuestionOwner = item.student_id === currentUser;
                             questionHtml = `
                                 <div class="col-md-6 mb-3">
                                     <div class="card">
                                         <div class="card-header">
-                                        <span class="badge float-end mt-3 ${
-                                            showStatus
-                                                ? "bg-success"
-                                                : "bg-warning"
-                                        }">${
-                                showStatus ? `Answered` : `Pending`
-                            }</span>
-                                            <h3 class="card-title">${
-                                                item.student_id
-                                            }</h3>
+                                        <span class="badge float-end mt-3 ${showStatus ? "bg-success" : "bg-warning"}">${showStatus ? `Answered` : `Pending`}</span>
+                                            <h3 class="card-title">${item.student_id}</h3>
                                         </div>
                                         <div class="card-body" style="height: 250px; overflow-y:scroll;">
                                             <h4>${item.title}</h4>
                                             <p>${item.content}</p>
-                                            ${
-                                                answerHtml(item.answers)
-                                                    ? "<hr/><h5>Answers:</h5>" +
-                                                      answerHtml(item.answers)
-                                                    : ""
-                                            }
+                                            ${answerHtml(item.answers) ? "<hr/><h5>Answers:</h5>" + answerHtml(item.answers) : ""}
                                         </div>
                                         <div class="card-footer">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex gap-2">
-                                                ${
-                                                    showVoteButton
-                                                        ? `<form action="vote.php" method="POST">
-                                                                        <input type="hidden" name="question_id" value="${
-                                                                            item.id
-                                                                        }" />
+                                                ${showVoteButton ? `<form action="vote.php" method="POST">
+                                                                        <input type="hidden" name="question_id" value="${item.id}" />
                                                                         <input type="hidden" name="module" value="${module}" />
-                                                                        <button type="submit" class="btn btn-sm ${
-                                                                            hasVoted
-                                                                                ? "btn-danger"
-                                                                                : "btn-primary"
-                                                                        }">${
-                                                              hasVoted
-                                                                  ? "Unvote"
-                                                                  : "Vote"
-                                                          }</button>
-                                                                    </form>`
-                                                        : ""
-                                                }
-                                                ${
-                                                    showAnswerButton
-                                                        ? `<a href="answer_form.php?question_id=${item.id}&module=${module}" class="btn btn-sm btn-primary btn-theme">Answer</a>`
-                                                        : ""
-                                                }
-                                                ${
-                                                    isQuestionOwner
-                                                        ? `<button class="btn btn-sm btn-danger delete-question" data-question-id="${item.id}">Delete</button>`
-                                                        : ""
-                                                }
+                                                                        <button type="submit" class="btn btn-sm ${hasVoted ? "btn-danger" : "btn-primary"}">${hasVoted ? "Unvote" : "Vote"}</button>
+                                                                    </form>` : ""}
+                                                ${showAnswerButton ? `<a href="answer_form.php?question_id=${item.id}&module=${module}" class="btn btn-sm btn-primary btn-theme">Answer</a>` : ""}
+                                                ${isQuestionOwner ? `<button class="btn btn-sm btn-danger delete-question" data-question-id="${item.id}">Delete</button>` : ""}
                                                 </div>
                                                 <div>
-                                                    Vote Count: <b class="badge text-bg-success">${
-                                                        item.votes.length
-                                                    }</b>
+                                                    Vote Count: <b class="badge text-bg-success">${item.votes.length}</b>
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +221,7 @@ $(document).ready(function () {
         }
     });
 
-    // Alert function for success and error messages
+    // Alert success and error messages
     function showAlert(message, type = "success") {
         const alertDiv = document.createElement("div");
         alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 translate-middle-x mt-5`;
@@ -281,7 +233,7 @@ $(document).ready(function () {
         }, 3000);
     }
 
-    // Function to handle AJAX errors
+    // Handle AJAX errors
     function handleAjaxError(xhr, status, error) {
         console.error("AJAX Error:", error);
         let errorMessage = "An error occurred. Please try again.";
@@ -292,7 +244,7 @@ $(document).ready(function () {
         showAlert(errorMessage, "danger");
     }
 
-    // Function to handle AJAX success
+    // Handle AJAX success
     function handleAjaxSuccess(response) {
         if (response.success) {
             showAlert(response.message || "Operation completed successfully");
