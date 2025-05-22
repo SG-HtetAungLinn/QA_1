@@ -7,7 +7,6 @@ $search = $_POST['search'] ?? '';
 
 $questions = getQuestions($module);
 
-// If search term is provided, filter the questions
 if (!empty($search)) {
     $search = strtolower($search);
     $questions = array_filter($questions, function ($question) use ($search) {
