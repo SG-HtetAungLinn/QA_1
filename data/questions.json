@@ -1,38 +1,5 @@
 {
     "questions": [
-        {
-            "title": "test title",
-            "content": "test question",
-            "module_code": "5230COMP",
-            "student_id": "STUDENT1",
-            "id": "682765d894512",
-            "created_at": "2025-05-16 16:20:40",
-            "answers": [
-                {
-                    "staff_id": "CSMSTAFF2",
-                    "answer": "answer 1",
-                    "id": "682766542476b",
-                    "created_at": "2025-05-16 16:22:44"
-                }
-            ],
-            "votes": [
-                "STUDENT1",
-                "STUDENT2",
-                "STUDENT3"
-            ]
-        },
-        {
-            "title": "test 2",
-            "content": "test 2 answer",
-            "module_code": "5230COMP",
-            "student_id": "STUDENT1",
-            "id": "6827660b4fd86",
-            "created_at": "2025-05-16 16:21:31",
-            "answers": [],
-            "votes": [
-                "STUDENT2",
-                "STUDENT5"
-            ]
-        }
+        
     ]
 }
