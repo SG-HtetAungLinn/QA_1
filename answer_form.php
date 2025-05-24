@@ -31,6 +31,7 @@ require "./layouts/header.php";
             <div class="card mb-4">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Question from: <?= $question['student_id'] ?></h5>
+                    <span><?= date('d/m/Y h:i a', strtotime($question['created_at'])) ?></span>
                 </div>
                 <div class="card-body">
                     <h3><?= $question['title'] ?></h3>

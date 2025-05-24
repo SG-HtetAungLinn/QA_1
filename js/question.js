@@ -58,12 +58,28 @@ $(document).ready(function () {
                             const showStatus = item.answers.length > 0;
                             // check if current user is the question owner
                             const isQuestionOwner = item.student_id === currentUser;
+
+                            // Date format
+                            const dateStr = item.created_at.replace(" ", "T");
+                            const d = new Date(dateStr);
+                            const day = String(d.getDate()).padStart(2, "0");
+                            const month = String(d.getMonth() + 1).padStart(2, "0");
+                            const year = d.getFullYear();
+                            let hours = d.getHours();
+                            const minutes = String(d.getMinutes()).padStart(2, "0");
+                            const ampm = hours >= 12 ? "pm" : "am";
+                            hours = hours % 12;
+                            hours = hours ? hours : 12;
+                            hours = String(hours).padStart(2, "0");
+                            const formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
+
                             questionHtml = `
                                 <div class="col-md-6 mb-3">
                                     <div class="card">
                                         <div class="card-header">
                                         <span class="badge float-end mt-3 ${showStatus ? "bg-success" : "bg-warning"}">${showStatus ? `Answered` : `Pending`}</span>
-                                            <h3 class="card-title">${item.student_id}</h3>
+                                            <h3 class="card-title"><i class='fas fa-user me-2 text-primary'></i>${item.student_id}</h3>
+                                           <span class="text-muted"><i class='far fa-clock me-1'></i>${formattedDate}</span>
                                         </div>
                                         <div class="card-body" style="height: 250px; overflow-y:scroll;">
                                             <h4>${item.title}</h4>
@@ -146,9 +162,22 @@ $(document).ready(function () {
     function answerHtml(answer) {
         let answerHtml = "";
         answer.forEach((item) => {
+            const dateStr = item.created_at.replace(" ", "T");
+            const d = new Date(dateStr);
+            const day = String(d.getDate()).padStart(2, "0");
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const year = d.getFullYear();
+            let hours = d.getHours();
+            const minutes = String(d.getMinutes()).padStart(2, "0");
+            const ampm = hours >= 12 ? "pm" : "am";
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            hours = String(hours).padStart(2, "0");
+            const formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
             answerHtml += `<div class="mb-2 py-3 px-1 shadow-sm rounded">
-                                <h4>${item.staff_id}</h4>
-                                <p class="mb-0 ps-3">${item.answer}</p>
+                                <h4><i class='fas fa-user me-2 text-primary'></i>${item.staff_id}</h4>
+                                <span class="text-muted"><i class='far fa-clock me-1'></i>${formattedDate}</span>
+                                <p class="mb-0 ps-3"><i class='fas fa-comment-dots me-2 text-secondary'></i>${item.answer}</p>
                             </div>`;
         });
         return answerHtml;

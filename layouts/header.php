@@ -9,37 +9,35 @@
     <link rel="stylesheet" href="./css/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./img/logo.png" alt="Logo" height="50" class="d-inline-block align-top">
+    <button class="sidebar-toggle-btn btn-sm" id="sidebarToggleBtn"><i class="fas fa-bars" id="sidebarToggleIcon"></i></button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <a href="#">
+                <img src="./img/logo.png" alt="Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-theme" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-theme" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-theme" href="logout.php">Logout</a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <?php if (isset($_SESSION['user'])) { ?>
-                        <span class="me-3 text-muted small">
-                            <?= $_SESSION['user']['username'] ?? '' ?>
-                            <span class="badge bg-theme ms-2"><?= $_SESSION['user']['role'] ?? '' ?></span>
-                        </span>
-                    <?php } ?>
-                </div>
-            </div>
         </div>
-    </nav>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link text-theme" aria-current="page" href="index.php"><i class="fas fa-home me-2"></i><span>Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-theme" href="about.php"><i class="fas fa-info-circle me-2"></i><span>About Us</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-theme" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i><span>Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-user">
+            <?php if (isset($_SESSION['user'])) { ?>
+                <?= $_SESSION['user']['username'] ?? '' ?>
+                <span class="badge bg-theme ms-2"><?= $_SESSION['user']['role'] ?? '' ?></span>
+            <?php } ?>
+        </div>
+    </aside>
