@@ -1,5 +1,6 @@
 <?php
 $dataPath = __DIR__ . '/../data/';
+date_default_timezone_set('Asia/Yangon');
 function readJson($filename)
 {
     global $dataPath;
