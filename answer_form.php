@@ -50,7 +50,7 @@ require "./layouts/header.php";
                     <small id="answer_error" class="text-danger" style="display: none;"></small>
                 </div>
 
-                <div class="d-grid gap-2">
+                <div class="text-end">
                     <button type="submit" class="btn btn-primary btn-theme">Submit Answer</button>
                     <a href="question_list.php?module=<?= $module ?>" class="btn btn-secondary">Cancel</a>
                 </div>

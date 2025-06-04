@@ -39,9 +39,9 @@ require "./layouts/header.php";
                         </div>
                         <input type="hidden" name="module" value="<?= $module ?>">
                         <input type="hidden" name="form_submit" value="1" />
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-theme w-100 mb-2">Submit</button>
-                            <a href="question_list.php?module=<?= $module_data['code'] ?>" class="btn btn-secondary w-100">Cancel</a>
+                        <div class="form-group text-end">
+                            <button type="submit" class="btn btn-primary btn-theme">Submit</button>
+                            <a href="question_list.php?module=<?= $module_data['code'] ?>" class="btn btn-secondary ">Cancel</a>
                         </div>
                     </form>
                 </div>

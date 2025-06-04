@@ -25,7 +25,7 @@
                         <form action="" method="POST" id="login_form">
                             <div class="form-group mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="username" name="username" class="form-control" id="username" value="" placeholder="Enter Username" />
+                                <input type="text" name="username" class="form-control" id="username" value="" placeholder="Enter Username" />
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password" class="form-label">Password</label>
